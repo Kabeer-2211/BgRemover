@@ -6,7 +6,6 @@ import ModeProvider from './contexts/ModeProvider'
 import AxiosInterceptorProvider from './contexts/AxiosInterceptorProvider'
 import UserProvider from './contexts/UserProvider'
 import ErrorProvider from './contexts/ErrorProvider'
-import Loader from './components/Loader';
 
 const App = () => {
   return (

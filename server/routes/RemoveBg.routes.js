@@ -31,6 +31,7 @@ router.post("/remove-bg", (req, res, next) => {
         if (err instanceof multer.MulterError) {
             return res.status(400).json({ success: false, message: err.message });
         } else if (err) {
+            console.log(err)
             return res.status(500).json({ success: false, message: 'Something went wrong while uploading' });
         } else if (!req.files || req.files.length === 0) {
             return res.status(400).json({ success: false, message: 'Please upload valid image files' });

@@ -8,11 +8,16 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ForgotPassword from '../views/ForgotPassword';
 import ResetPassword from '../views/auth/ResetPassword';
+import BgRemoverProvider from '../contexts/BgRemoverProvider';
 
 const Router = () => {
     return (
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={
+                <BgRemoverProvider>
+                    <Home />
+                </BgRemoverProvider>
+            } />
             <Route path='/login' element={
                 <PublicRoute>
                     <Login />
