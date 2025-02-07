@@ -4,7 +4,6 @@ import Home from '../views/home';
 import Login from '../views/Login';
 import Signup from '../views/Signup';
 import VerifyEmail from '../views/auth/VerifyEmail';
-import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ForgotPassword from '../views/ForgotPassword';
 import ResetPassword from '../views/auth/ResetPassword';

@@ -1,7 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const db = require("./db/config.db");
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
@@ -9,7 +10,6 @@ const AuthRoutes = require("./routes/Auth.routes");
 const RemoveBgRoutes = require("./routes/RemoveBg.routes");
 const fs = require('fs');
 
-dotenv.config();
 db();
 
 app.use(cors());

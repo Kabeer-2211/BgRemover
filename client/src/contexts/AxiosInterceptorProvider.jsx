@@ -1,17 +1,17 @@
 import { useEffect, createContext } from "react";
 import axios from "../utils/axios";
-import { getToken } from "../utils/User";
 import useError from "../hooks/useError";
+import useSession from "../hooks/useSession";
 
 export const axiosInterceptorContext = createContext();
 
 const AxiosInterceptorProvider = ({ children }) => {
     const { showError } = useError();
+    const { token } = useSession();
     function useInterceptor() {
         useEffect(() => {
             const requestIntercepter = axios.interceptors.request.use(
                 (config) => {
-                    const token = getToken();
                     if (token) {
                         config.headers.Authorization = `bearer ${token}`;
                     }

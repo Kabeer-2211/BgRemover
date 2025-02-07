@@ -4,6 +4,7 @@ import 'remixicon/fonts/remixicon.css'
 import useMode from '../hooks/useMode'
 import useSession from '../hooks/useSession'
 import useError from '../hooks/useError'
+import OAuthWrapper from '../components/OAuthWrapper'
 
 const Login = () => {
     const { loginUser } = useSession();
@@ -36,7 +37,7 @@ const Login = () => {
                 <span className="sr-only">Info</span>
                 <div><span className="font-medium">Verify your email!</span> An email has been sent to your email address.</div>
             </div>}
-            <form className={`${isDark ? 'bg-charcoal text-white' : 'bg-white'} p-10 rounded-2xl w-96 shadow-lg`} onSubmit={handleSubmit}>
+            <form className={`${isDark ? 'bg-charcoal text-white' : 'bg-white'} px-10 py-5 rounded-2xl w-96 shadow-lg`} onSubmit={handleSubmit}>
                 <h1 className='text-3xl font-semibold text-center mb-6'>LOGIN</h1>
                 <div className='flex flex-col gap-2'>
                     <h3 className='text-lg font-semibold'>Email</h3>
@@ -52,6 +53,8 @@ const Login = () => {
                 <Link to='/forgot-password' className='text-sm text-gray-500 ms-2 hover:text-gray-700'>Forgot Password?</Link>
                 <p className='text-sm text-gray-500 text-center mt-2 ms-2'>Don't have an account? <Link to='/signup' className='font-semibold text-base hover:underline'>Register</Link></p>
                 <button className='bg-primary text-white px-4 py-2 rounded-full w-full mt-8 hover:bg-primary/90'>Login</button>
+                <div className='text-slate-500 w-fit mx-auto my-3'>OR</div>
+                <OAuthWrapper />
             </form>
         </div>
     )

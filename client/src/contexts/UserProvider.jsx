@@ -1,41 +1,37 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useEffect } from 'react';
 import { login, register, getProfile, verifymail, forgotPassword as forgotPasswordService, resetPassword as resetPasswordService } from '../services/User';
-import { getToken, setToken, deleteToken } from '../utils/User';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAxiosInterceptor from '../hooks/useAxiosInterceptor';
+import { setUser, beginAuthentication, authenticationSuccess, authenticationFailure, finishLoading, logout as logoutState } from '../redux/slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const { useInterceptor } = useAxiosInterceptor();
     useInterceptor();
-    const [user, setUser] = useState();
-    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { token } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const { pathname } = useLocation();
-    const token = getToken();
-    const isAuthenticated = Boolean(token);
     useEffect(() => {
         if (!token) {
-            deleteToken();
-            setUser(undefined);
+            dispatch(logoutState());
         }
     }, [navigate, pathname, token]);
     useEffect(() => {
-        const token = getToken();
         async function getUserdata() {
             try {
-                setIsLoading(true);
                 const response = await getProfile();
                 if (response && response.success) {
-                    setUser(response.user);
+                    dispatch(setUser(response.user));
                 }
             } catch (err) {
                 logout();
                 console.log(err);
             } finally {
                 setTimeout(() => {
-                    setIsLoading(false);
+                    dispatch(finishLoading());
                 }, 500);
             }
         }
@@ -46,7 +42,6 @@ const UserContextProvider = ({ children }) => {
 
     const signupUser = async (data) => {
         try {
-            setIsLoading(true);
             const response = await register(data);
             if (response) {
                 return true;
@@ -55,30 +50,24 @@ const UserContextProvider = ({ children }) => {
             console.log(err);
         } finally {
             setTimeout(() => {
-                setIsLoading(false);
+                dispatch(finishLoading());
             }, 500);
         }
     };
     const loginUser = async (data) => {
         try {
-            setIsLoading(true);
+            dispatch(beginAuthentication());
             const response = await login(data);
-            console.log(response);
             if (!response.isVerified && response.isVerified == false) {
                 return false;
             } else if (!response.isVerified) {
                 return true;
             } else {
-                setUser(response.user);
-                setToken(response.token);
-                window.location.href = '/';
+                dispatch(authenticationSuccess({ token: response.token, user: response.user }));
             }
         } catch (err) {
+            dispatch(authenticationFailure());
             console.log(err);
-        } finally {
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 500);
         }
     };
     const verifyEmail = async (info) => {
@@ -91,7 +80,6 @@ const UserContextProvider = ({ children }) => {
     }
     const forgotPassword = async (data) => {
         try {
-            setIsLoading(true);
             const response = await forgotPasswordService(data);
             if (response && response.success) {
                 return true;
@@ -102,13 +90,12 @@ const UserContextProvider = ({ children }) => {
             console.log(err);
         } finally {
             setTimeout(() => {
-                setIsLoading(false);
+                dispatch(finishLoading());
             }, 500);
         }
     }
     const resetPassword = async (data) => {
         try {
-            setIsLoading(true);
             const response = await resetPasswordService(data);
             if (response && response.success) {
                 logout();
@@ -118,15 +105,13 @@ const UserContextProvider = ({ children }) => {
             console.log(err);
         } finally {
             setTimeout(() => {
-                setIsLoading(false);
+                dispatch(finishLoading());
             }, 500);
         }
     }
     const logout = () => {
         try {
-            setUser(undefined);
-            deleteToken();
-            window.location.href = '/login';
+            dispatch(logoutState());
         } catch (err) {
             console.log(err);
         }
@@ -134,9 +119,6 @@ const UserContextProvider = ({ children }) => {
 
     return (
         <UserContext.Provider value={{
-            isAuthenticated,
-            user,
-            isLoading,
             signupUser,
             loginUser,
             logout,
