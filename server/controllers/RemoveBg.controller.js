@@ -8,7 +8,7 @@ async function removeBg(req, res) {
             const buffer = await removeBgService(file.path);
             fs.unlinkSync(file.path);
             const filename = file.filename.split('.')[0];
-            fs.writeFileSync(`./public/TEMP/${filename}.png`, buffer, 'base64');
+            fs.writeFileSync(`./public/TEMP/${filename}.png`, buffer);
             images.push(`${process.env.BASE_URL}/TEMP/${filename}.png`);
         };
         res.json({ success: true, message: 'Background removed successfully', data: images });

@@ -1,6 +1,6 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import useMode from '../../hooks/useMode';
+
+import useMode from '@hooks/useMode';
 
 const Link = ({ label, to = '/' }) => {
     const { isDark } = useMode();

@@ -1,11 +1,12 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Error from '../components/error';
-import useError from '../hooks/useError';
-import Loader from '../components/Loader';
-import useSession from '../hooks/useSession';
 import { Suspense } from 'react';
+
 import { ErrorBoundary } from 'react-error-boundary';
+
+import Navbar from '@components/Navbar';
+import Error from '@components/error';
+import useError from '@hooks/useError';
+import Loader from '@components/Loader';
+import useSession from '@hooks/useSession';
 
 const Layout = ({ children }) => {
     const { error, showError } = useError();

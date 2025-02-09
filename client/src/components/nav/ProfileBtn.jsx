@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import useSession from '../../hooks/useSession';
-import Tooltip from '../Tooltip';
-import useMode from '../../hooks/useMode';
+
+import Tooltip from '@components/Tooltip';
+import useSession from '@hooks/useSession';
+import useMode from '@hooks/useMode';
 
 const ProfileBtn = () => {
     const { user, logout } = useSession();

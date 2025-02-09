@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import 'remixicon/fonts/remixicon.css'
-import useMode from '../hooks/useMode'
-import useSession from '../hooks/useSession'
-import useError from '../hooks/useError'
-import OAuthWrapper from '../components/OAuthWrapper'
+
+import useMode from '@hooks/useMode'
+import useSession from '@hooks/useSession'
+import useError from '@hooks/useError'
+import OAuthWrapper from '@components/OAuthWrapper'
 
 const Login = () => {
     const { loginUser } = useSession();

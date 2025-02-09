@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ResultPlaceholder = () => {
     return (
         <div className='flex flex-col items-center justify-evenly h-full'>

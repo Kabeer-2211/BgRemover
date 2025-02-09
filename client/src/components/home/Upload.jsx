@@ -1,6 +1,7 @@
 import { useRef } from 'react';
-import useMode from '../../hooks/useMode';
-import useBgRemover from './../../hooks/useBgRemover';
+
+import useMode from '@hooks/useMode';
+import useBgRemover from '@hooks/useBgRemover';
 
 const Upload = () => {
     const { isDark } = useMode();

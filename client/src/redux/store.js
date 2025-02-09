@@ -1,10 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import authReducer from "./slices/authSlice";
 import { persistReducer, persistStore, createTransform } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import authReducer from "@redux/slices/authSlice";
+import bgRemoverReducer from "@redux/slices/bgRemoverSlice";
+
 const rootReducer = combineReducers({
   auth: authReducer,
+  bgRemover: bgRemoverReducer,
 });
 
 const filterTransform = createTransform(
@@ -21,6 +24,7 @@ const persistConfig = {
   storage,
   version: 1,
   transforms: [filterTransform],
+  blacklist: ["bgRemover"],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

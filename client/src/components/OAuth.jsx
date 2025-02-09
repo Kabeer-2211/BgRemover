@@ -1,9 +1,9 @@
-import React from 'react'
-import useMode from '../hooks/useMode'
 import { useGoogleLogin } from '@react-oauth/google'
-import { googleAuth } from '../services/User'
-import { authenticationSuccess } from './../redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
+
+import useMode from '@hooks/useMode'
+import { googleAuth } from '@services/User'
+import { authenticationSuccess } from '@redux/slices/authSlice'
 
 const OAuth = () => {
     const { isDark } = useMode();

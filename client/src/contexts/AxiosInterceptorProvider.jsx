@@ -1,7 +1,8 @@
 import { useEffect, createContext } from "react";
-import axios from "../utils/axios";
-import useError from "../hooks/useError";
-import useSession from "../hooks/useSession";
+
+import axios from "@utils/axios";
+import useError from "@hooks/useError";
+import useSession from "@hooks/useSession";
 
 export const axiosInterceptorContext = createContext();
 

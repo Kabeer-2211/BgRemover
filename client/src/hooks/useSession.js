@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { UserContext } from "../contexts/UserProvider";
+
 import { useSelector } from "react-redux";
 
-const useSession = () => ({
-  ...useContext(UserContext),
-  ...useSelector((state) => state.auth),
-});
+import { UserContext } from "@contexts/UserProvider";
+
+const useSession = () => {
+  const context = useContext(UserContext);
+  const authState = useSelector((state) => state.auth);
+  return { ...context, ...authState };
+};
 
 export default useSession;

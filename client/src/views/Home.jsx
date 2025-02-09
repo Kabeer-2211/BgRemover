@@ -1,8 +1,9 @@
 import 'remixicon/fonts/remixicon.css';
-import useMode from '../hooks/useMode';
-import Upload from '../components/home/upload';
-import Result from '../components/home/Result';
-import useBgRemover from './../hooks/useBgRemover';
+
+import useMode from '@hooks/useMode';
+import Upload from '@components/home/upload';
+import Result from '@components/home/Result';
+import useBgRemover from '@hooks/useBgRemover';
 
 const Home = () => {
   const { isDark } = useMode();

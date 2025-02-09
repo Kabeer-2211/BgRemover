@@ -5,8 +5,7 @@ const removeBg = async (imageSource) => {
     try {
         const blob = await removeBackground(`file://${path.resolve(imageSource)}`);
         const buffer = await Buffer.from(await blob.arrayBuffer());
-        // const dataUrl = `data:image/png;base64,${buffer.toString('base64')}`;
-        return buffer.toString('base64');
+        return buffer;
     } catch (err) {
         console.log(err);
         return null;

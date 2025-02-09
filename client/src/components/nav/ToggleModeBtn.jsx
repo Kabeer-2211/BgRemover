@@ -1,5 +1,4 @@
-import React from 'react';
-import useMode from '../../hooks/useMode';
+import useMode from '@hooks/useMode';
 
 const ModeTogglBtn = () => {
     const { isDark, changeMode } = useMode();

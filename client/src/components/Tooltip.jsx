@@ -1,5 +1,4 @@
-import React from 'react';
-import useMode from '../hooks/useMode';
+import useMode from '@hooks/useMode';
 
 const Tooltip = ({ children, text, position = 'top-12 left-0' }) => {
     const { isDark } = useMode();

@@ -1,8 +1,12 @@
 import { useContext } from "react";
-import { BgRemoverContext } from "../contexts/BgRemoverProvider";
 
-function bgRemover() {
-  return useContext(BgRemoverContext);
-}
+import { useSelector } from "react-redux";
 
-export default bgRemover;
+import { BgRemoverContext } from "@contexts/BgRemoverProvider";
+
+const useBgRemover = () => {
+  const context = useContext(BgRemoverContext);
+  const bgRemoverState = useSelector((state) => state.bgRemover);
+  return { ...context, ...bgRemoverState };
+};
+export default useBgRemover;

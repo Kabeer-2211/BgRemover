@@ -1,8 +1,10 @@
 import { useState } from 'react'
+
 import 'remixicon/fonts/remixicon.css'
-import useMode from '../hooks/useMode'
-import useSession from '../hooks/useSession'
-import useError from '../hooks/useError'
+
+import useMode from '@hooks/useMode'
+import useSession from '@hooks/useSession'
+import useError from '@hooks/useError'
 
 const ForgotPassword = () => {
     const { forgotPassword } = useSession();

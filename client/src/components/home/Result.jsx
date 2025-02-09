@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import ResultLoader from './ResultLoader';
-import ResultOpt from './ResultOpt';
-import ResultImg from './ResultImg';
-import ResultPlaceholder from './ResultPlaceholder';
-import useMode from '../../hooks/useMode';
-import useBgRemover from './../../hooks/useBgRemover';
+
+import ResultLoader from '@components/home/ResultLoader';
+import ResultOpt from '@components/home/ResultOpt';
+import ResultImg from '@components/home/ResultImg';
+import ResultPlaceholder from '@components/home/ResultPlaceholder';
+import useMode from '@hooks/useMode';
+import useBgRemover from '@hooks/useBgRemover';
 
 const Result = () => {
     const colors = ["#FFFFFF", "#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FFA500", "#800080", "#00FFFF", "#FFC0CB", "#A52A2A", "#808080", "#800000", "#808000", "#008000", "#000080", "#ADD8E6", "#F08080", "#90EE90", "#FFD700", "#D2691E", "#B22222", "#FF4500", "#2E8B57", "#48D1CC", "#7B68EE", "#9370DB", "#4682B4"];

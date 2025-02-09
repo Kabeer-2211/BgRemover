@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { axiosInterceptorContext } from "../contexts/AxiosInterceptorProvider";
+
+import { axiosInterceptorContext } from "@contexts/AxiosInterceptorProvider";
 
 function useAxiosInterceptor() {
     return useContext(axiosInterceptorContext);

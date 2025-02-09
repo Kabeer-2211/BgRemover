@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
-import useSession from '../../hooks/useSession';
-import useMode from '../../hooks/useMode';
 import 'remixicon/fonts/remixicon.css'
-import useError from '../../hooks/useError';
+
+import useSession from '@hooks/useSession';
+import useMode from '@hooks/useMode';
+import useError from '@hooks/useError';
 
 const ResetPassword = () => {
     const { isDark } = useMode();

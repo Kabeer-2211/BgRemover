@@ -1,11 +1,11 @@
-import React from 'react'
-import Router from './router'
 import { BrowserRouter } from 'react-router-dom'
-import Layout from './layout/Layout'
-import ModeProvider from './contexts/ModeProvider'
-import AxiosInterceptorProvider from './contexts/AxiosInterceptorProvider'
-import UserProvider from './contexts/UserProvider'
-import ErrorProvider from './contexts/ErrorProvider'
+
+import Router from '@router'
+import Layout from '@layout/Layout'
+import ModeProvider from '@contexts/ModeProvider'
+import AxiosInterceptorProvider from '@contexts/AxiosInterceptorProvider'
+import UserProvider from '@contexts/UserProvider'
+import ErrorProvider from '@contexts/ErrorProvider'
 
 const App = () => {
   return (

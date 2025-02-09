@@ -1,9 +1,11 @@
 import { createContext, useEffect } from 'react';
-import { login, register, getProfile, verifymail, forgotPassword as forgotPasswordService, resetPassword as resetPasswordService } from '../services/User';
-import { useNavigate, useLocation } from 'react-router-dom';
-import useAxiosInterceptor from '../hooks/useAxiosInterceptor';
-import { setUser, beginAuthentication, authenticationSuccess, authenticationFailure, finishLoading, logout as logoutState } from '../redux/slices/authSlice';
+
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { login, register, getProfile, verifymail, forgotPassword as forgotPasswordService, resetPassword as resetPasswordService } from '@services/User';
+import useAxiosInterceptor from '@hooks/useAxiosInterceptor';
+import { setUser, beginAuthentication, authenticationSuccess, authenticationFailure, finishLoading, logout as logoutState } from '@redux/slices/authSlice';
 
 export const UserContext = createContext();
 

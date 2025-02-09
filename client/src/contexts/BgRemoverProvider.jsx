@@ -1,16 +1,21 @@
 import { createContext, useEffect, useState, useRef, createRef } from 'react';
-import useSession from '../hooks/useSession';
-import useError from '../hooks/useError';
-import { removeBg } from './../services/BgRemover';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import useSession from '@hooks/useSession';
+import useError from '@hooks/useError';
+import { removeBg } from '@services/BgRemover';
+import { addImage, deleteImage, setActiveImage, updateImage } from '@redux/slices/bgRemoverSlice';
 
 export const BgRemoverContext = createContext();
 
+const allowedFormats = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+
 const BgRemoverProvider = ({ children }) => {
-    const allowedFormats = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     const { isAuthenticated } = useSession();
     const { showError } = useError();
-    const [images, setImages] = useState([]);
-    const [activeImage, setActiveImage] = useState(0);
+    const dispatch = useDispatch();
+    const { images, activeImage } = useSelector(state => state.bgRemover);
     const [limit, setLimit] = useState(isAuthenticated ? 4 : 2);
     const [showOriginal, setShowOriginal] = useState(false);
     const [color, setColor] = useState('#FFFFFF00');
@@ -28,18 +33,15 @@ const BgRemoverProvider = ({ children }) => {
     }, [isAuthenticated]);
     const handleDelete = (e, index) => {
         e.stopPropagation();
-        setImages((prevImages) => {
-            const newImages = prevImages.filter((_, i) => i !== index);
-            if (index === activeImage) {
-                if (newImages.length === 0) {
-                    setActiveImage(0);
-                } else {
-                    setActiveImage(index >= newImages.length ? newImages.length - 1 : index);
-                }
+        dispatch(deleteImage(index));
+        if (index === activeImage) {
+            if (images.length === 0) {
+                dispatch(setActiveImage(0));
+            } else {
+                dispatch(setActiveImage(index >= images.length ? images.length - 1 : index));
             }
-            return newImages;
-        });
-        refs.current = refs.current.filter(_, i => index !== i);
+        }
+        refs.current = refs.current.filter((_, i) => index !== i);
     }
     const handleDownload = (name, ref) => {
         const canvas = ref.current;
@@ -60,19 +62,10 @@ const BgRemoverProvider = ({ children }) => {
                     _FORM.append('image', img.file);
                     const result = await removeBg(_FORM);
                     if (result.success) {
-                        setImages((prevImages) => {
-                            const newImages = [...prevImages];
-                            newImages[i] = { ...newImages[i], submitted: true, result: result.data[0] };
-                            return newImages;
-                        });
+                        dispatch(updateImage({ index: i, updatedImage: { submitted: true, result: result.data[0] } }));
                     }
                 }
             }
-        }
-        if (images.length > limit) {
-            const newArr = images.slice(0, limit);
-            setImages(newArr);
-            showError("You have reached the limit of " + limit + " images");
         }
         removeBackground();
     }, [images]);
@@ -84,7 +77,7 @@ const BgRemoverProvider = ({ children }) => {
         const files = e.target.files;
         for (const file of files) {
             if (isImageFile(file)) {
-                setImages((prevImages) => [...prevImages, { submitted: false, file, result: null, o_src: URL.createObjectURL(file) }]);
+                dispatch(addImage({ submitted: false, file, result: null, o_src: URL.createObjectURL(file) }));
             }
         }
     }
@@ -101,7 +94,7 @@ const BgRemoverProvider = ({ children }) => {
         if (imageFiles.length > 0) {
             imageFiles.forEach(file => {
                 if (isImageFile(file)) {
-                    setImages((prevImages) => [...prevImages, { submitted: false, file, result: null, o_src: URL.createObjectURL(file) }]);
+                    dispatch(addImage({ submitted: false, file, result: null, o_src: URL.createObjectURL(file) }));
                 }
             });
         } else {
@@ -120,7 +113,7 @@ const BgRemoverProvider = ({ children }) => {
                     const file = clipboardItems[i].getAsFile();
                     if (file) {
                         if (isImageFile(file)) {
-                            setImages((prevImages) => [...prevImages, { submitted: false, file, result: null, o_src: URL.createObjectURL(file) }]);
+                            dispatch(addImage({ submitted: false, file, result: null, o_src: URL.createObjectURL(file) }));
                         }
                     }
                 }
@@ -134,14 +127,10 @@ const BgRemoverProvider = ({ children }) => {
 
     return (
         <BgRemoverContext.Provider value={{
-            images,
             handleDelete,
             handleUpload,
             handleDrop,
             handleDownload,
-            setActiveImage,
-            activeImage,
-            setImages,
             showOriginal,
             setShowOriginal,
             color,

@@ -1,6 +1,6 @@
-import React from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google'
-import OAuth from './OAuth'
+
+import OAuth from '@components/OAuth'
 
 const OAuthWrapper = () => {
     return (

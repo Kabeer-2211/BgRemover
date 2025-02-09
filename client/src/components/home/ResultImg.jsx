@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import useBgRemover from './../../hooks/useBgRemover';
+
+import useBgRemover from '@hooks/useBgRemover';
 
 const ResultImg = ({ item, canvasRef }) => {
     const { showOriginal, color } = useBgRemover();
@@ -14,7 +15,11 @@ const ResultImg = ({ item, canvasRef }) => {
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.onload = () => {
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                const scale = window.devicePixelRatio;
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                ctx.scale(scale, scale);
+                ctx.drawImage(img, 0, 0, img.width, img.height);
             };
             img.src = item.result;
         }

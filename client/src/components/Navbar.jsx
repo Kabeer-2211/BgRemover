@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import ToggleNav from './nav/ToggleNav';
-import Link from './nav/Link';
-import ModeTogglBtn from './nav/ToggleModeBtn';
-import useMode from '../hooks/useMode';
-import LoginBtn from './nav/LoginBtn';
-import useSession from '../hooks/useSession';
-import ProfileBtn from './nav/ProfileBtn';
+
+import useMode from '@hooks/useMode';
+import useSession from '@hooks/useSession';
+import ToggleNav from '@components/nav/ToggleNav';
+import Link from '@components/nav/Link';
+import ModeTogglBtn from '@components/nav/ToggleModeBtn';
+import LoginBtn from '@components/nav/LoginBtn';
+import ProfileBtn from '@components/nav/ProfileBtn';
 
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false);

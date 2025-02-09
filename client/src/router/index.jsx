@@ -1,13 +1,15 @@
 import React from 'react';
+
 import { Routes, Route } from 'react-router-dom'
-import Home from '../views/home';
-import Login from '../views/Login';
-import Signup from '../views/Signup';
-import VerifyEmail from '../views/auth/VerifyEmail';
+
+import Home from '@views/home';
+import Login from '@views/Login';
+import Signup from '@views/Signup';
+import VerifyEmail from '@views/auth/VerifyEmail';
 import PublicRoute from './PublicRoute';
-import ForgotPassword from '../views/ForgotPassword';
-import ResetPassword from '../views/auth/ResetPassword';
-import BgRemoverProvider from '../contexts/BgRemoverProvider';
+import ForgotPassword from '@views/ForgotPassword';
+import ResetPassword from '@views/auth/ResetPassword';
+import BgRemoverProvider from '@contexts/BgRemoverProvider';
 
 const Router = () => {
     return (

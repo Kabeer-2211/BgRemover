@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
-import useSession from '../../hooks/useSession';
+
+import useSession from '@hooks/useSession';
 
 const VerifyEmail = () => {
     const { verifyEmail } = useSession();

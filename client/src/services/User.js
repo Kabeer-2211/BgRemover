@@ -1,4 +1,4 @@
-import axios from "../utils/axios";
+import axios from "@utils/axios";
 
 export const googleAuth = async (data) =>
   await axios.get(`/api/auth/google/callback?code=${data}`);
